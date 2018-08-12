@@ -1,0 +1,36 @@
+modeltype Books uses 'http://com.book';
+modeltype Publications uses 'http://com.pub';
+
+
+transformation Book2PublicationTrans(in src:Books, out dst:Publications);
+
+main() {
+	src.rootObjects()[Book] -> map Book2Pub();
+}
+
+mapping  Books::Book::Book2Pub(): Publications::Publication
+{
+	title := self.title;
+	authors := self.getAuthors();
+	nbPages := self.getSumPages();
+}
+
+helper Books::Book::getAuthors() : String =
+return self.chapters->collect(e | e.author)->
+	   					asSet()->
+						iterate(authorName; acc : String = '' |
+                   				acc + 
+								if acc = '' 
+									then authorName 
+									else ' and ' + authorName 
+								endif);
+								
+								
+helper Books::Book::getNbPages() : Integer =
+return self.chapters->collect(f|f.nbPages)->
+						iterate(pages; acc : Integer = 0 |
+                      	acc + pages);
+                      	
+helper Books::Book::getSumPages() : Integer =
+return self.chapters->collect(f|f.nbPages)->sum();
+

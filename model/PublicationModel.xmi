@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.pub="http://com.pub" xsi:schemaLocation="http://com.pub ../metamodel/Publication.xmi">
+  <com.pub:Publication title="article" authors="Michel and David" nbPages="14"/>
+  <com.pub:Publication title="livre" authors="toto and titi" nbPages="50"/>
+</xmi:XMI>
